@@ -1,0 +1,141 @@
+<div class="row justify-content-center pt-3">
+    <div class="col-md-8 col-xl-5">
+      <form [formGroup]="profileForm" (ngSubmit)="register()">
+        <div class="form-group">
+          <label for="first-name">First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="first-name"
+            formControlName="fname"
+            [ngClass]="{
+              valid: profileForm.get('fname').valid,
+              invalid:
+                profileForm.get('fname').invalid && profileForm.get('fname').dirty
+            }"
+          />
+          <span
+            class="invalidTxt"
+            *ngIf="
+              profileForm.get('fname').invalid && profileForm.get('fname').dirty
+            "
+            >Enter valid name min(2 chars)</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="last-name">Last Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="last-name"
+            formControlName="lname"
+            [ngClass]="{
+              valid: profileForm.get('lname').valid,
+              invalid:
+                profileForm.get('lname').invalid && profileForm.get('lname').dirty
+            }"
+          />
+          <span
+            class="invalidTxt"
+            *ngIf="
+              profileForm.get('lname').invalid && profileForm.get('lname').dirty
+            "
+            >Enter valid name min(2 chars)</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            aria-describedby="emailHelp"
+            formControlName="email"
+            [ngClass]="{
+              valid: profileForm.get('email').valid,
+              invalid:
+                profileForm.get('email').invalid && profileForm.get('email').dirty
+            }"
+          /><span
+            class="invalidTxt"
+            *ngIf="
+              profileForm.get('email').invalid && profileForm.get('email').dirty
+            "
+            >Enter valid email</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="pass">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="pass"
+            formControlName="pass"
+            [ngClass]="{
+              valid: profileForm.get('pass').valid,
+              invalid:
+                profileForm.get('pass').invalid && profileForm.get('pass').dirty
+            }"
+            (input)="updatePatt()"
+          />
+          <span
+            class="invalidTxt"
+            *ngIf="
+              profileForm.get('pass').invalid && profileForm.get('pass').dirty
+            "
+            >Enter valid password min(4 chars)</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="rpass">Re-Enter Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="rpass"
+            formControlName="rpass"
+            [ngClass]="{
+              valid:
+                profileForm.get('rpass').valid && profileForm.get('pass').valid,
+              invalid:
+                profileForm.get('rpass').invalid && profileForm.get('rpass').dirty
+            }"
+          /><span
+            class="invalidTxt"
+            *ngIf="
+              profileForm.get('rpass').invalid && profileForm.get('rpass').dirty
+            "
+            >passwords dont match</span
+          >
+        </div>
+        <div class="text-center">
+          <div
+            *ngIf="requesting"
+            class="spinner-border text-success"
+            role="status"
+          >
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+        <button
+          *ngIf="!requesting"
+          type="submit"
+          class="btn btn-primary"
+          [ngClass]="{
+            'btn-success': profileForm.valid,
+            'btn-danger': profileForm.invalid
+          }"
+          [disabled]="profileForm.invalid"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="row pt-3">
+    <div class="col text-center">
+      <p>OR</p>
+      <button type="button" class="btn btn-primary" routerLink="/login">
+        Login
+      </button>
+    </div>
+  </div>

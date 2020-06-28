@@ -1,0 +1,27 @@
+<select
+  class="form-control mr-5 text-muted"
+  [id]="this.id"
+  (change)="changeChart()"
+  style="width: 30%;"
+>
+  <option selected value="bar">Bar Chart</option>
+  <option value="line">Line Chart</option>
+  <option value="pie">Pie Chart</option>
+  <option value="doughnut">Doughnut Chart</option>
+  <option value="polarArea">Polar Chart</option>
+  <option value="radar">Radar Chart</option>
+</select>
+<div style="display: block;">
+  <canvas
+    baseChart
+    width="400"
+    height="400"
+    [datasets]="ChartData"
+    [labels]="ChartLabels"
+    [colors]="ChartColors"
+    [legend]="ChartLegend"
+    [chartType]="ChartType"
+    [plugins]="ChartPlugins"
+  >
+  </canvas>
+</div>

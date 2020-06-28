@@ -1,0 +1,84 @@
+<div class="row justify-content-center pt-3">
+    <div class="col-md-8 col-xl-5">
+      <form [formGroup]="profileForm" (ngSubmit)="login()">
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            aria-describedby="emailHelp"
+            formControlName="email"
+            [ngClass]="{
+              valid: profileForm.get('email').valid,
+              invalid:
+                profileForm.get('email').invalid && profileForm.get('email').dirty
+            }"
+          />
+          <span
+            class="invalidTxt"
+            *ngIf="
+              profileForm.get('email').invalid && profileForm.get('email').dirty
+            "
+            >Enter valid email</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="pass">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="pass"
+            formControlName="pass"
+            [ngClass]="{
+              valid: profileForm.get('pass').valid,
+              invalid:
+                profileForm.get('pass').invalid && profileForm.get('pass').dirty
+            }"
+          />
+          <span
+            class="invalidTxt"
+            *ngIf="
+              profileForm.get('pass').invalid && profileForm.get('pass').dirty
+            "
+            >Enter valid password
+          </span>
+        </div>
+        <div class="text-center">
+          <div
+            *ngIf="requesting"
+            class="spinner-border text-success"
+            role="status"
+          >
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+  
+        <button
+          *ngIf="!requesting"
+          type="submit"
+          class="btn btn-primary mr-4"
+          [ngClass]="{
+            'btn-success': profileForm.valid,
+            'btn-danger': profileForm.invalid
+          }"
+          [disabled]="profileForm.invalid"
+        >
+          Login
+        </button>
+        /
+        <button class="btn btn-success ml-4" type="button" (click)="guestLogin()">
+          Guest Login
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="row pt-3">
+    <div class="col text-center">
+      <p>OR</p>
+  
+      <button type="button" class="btn btn-primary" routerLink="/register">
+        Register
+      </button>
+    </div>
+  </div>

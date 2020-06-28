@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="col-lg-12 col-xl-7">
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          id="search"
+          placeholder="Search..."
+          (input)="filter()"
+          style="width: 50%;"
+        />
+      </div>
+      <table class="table table-hover table-light table-borderless table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">State</th>
+            <th class="text-right" scope="col">confirmed</th>
+            <th class="text-right" scope="col">active</th>
+            <th class="text-right" scope="col">recovered</th>
+            <th class="text-right" scope="col">deaths</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="mt-3" *ngFor="let state of filteredData; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>
+              <button
+                *ngIf="state['state'] != 'Total'"
+                class="btn btn-warning mr-2"
+                type="button"
+                (click)="goToState(state['statecode'])"
+              >
+                State view
+              </button>
+              {{ state["state"] }}({{ state["statecode"] }})
+            </td>
+            <td class="text-right">
+              <small class="text-primary pr-2" *ngIf="state['deltaconfirmed'] > 0"
+                >+{{ state["deltaconfirmed"] }}</small
+              >{{ state["confirmed"] }}
+            </td>
+            <td class="text-right">{{ state["active"] }}</td>
+            <td class="text-right">
+              <small class="text-success pr-2" *ngIf="state['deltarecovered'] > 0"
+                >+{{ state["deltarecovered"] }}</small
+              >
+              {{ state["recovered"] }}
+            </td>
+            <td class="text-right">
+              <small class="text-danger pr-2" *ngIf="state['deltadeaths'] > 0"
+                >+{{ state["deltadeaths"] }}</small
+              >{{ state["deaths"] }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-12 col-lg-12 col-xl-5 pt-5">
+      <div class="row mb-3">
+        <div class="col-3 offset-2"></div>
+      </div>
+      <p class="h2">State Wise</p>
+      <app-barchart
+        set_id="statewiseChartSelect"
+        #statewiseChart
+      ></app-barchart>
+      <p class="h2">Country Total</p>
+      <app-barchart
+        set_id="countryTotalChartSelect"
+        #countryTotalChart
+      ></app-barchart>
+      <p class="h2">Country Trend</p>
+      <app-barchart
+        set_id="countryTrendChartSelect"
+        #countryTrendChart
+      ></app-barchart>
+    </div>
+  </div>
